@@ -1,0 +1,14 @@
+[Unit]
+Description=Test Service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Environment="CONFIG_PATH=/etc/test"
+Restart=always
+RestartSec=1
+User=test
+ExecStart=/usr/bin/test
+
+[Install]
+WantedBy=multi-user.target

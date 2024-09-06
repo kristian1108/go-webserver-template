@@ -1,0 +1,27 @@
+- name: Checkout repo on builder
+  hosts: server
+  remote_user: test
+  tasks:
+    - name: Copy Binary
+      become: yes
+      copy:
+        mode: '0755'
+        src: bin/test
+        dest: /usr/bin/test
+    - name: Copy Service File
+      become: yes
+      copy:
+        src: systemd/test.service
+        dest: /etc/test/test.service
+    - name: Symlink service file
+      become: yes
+      copy:
+        remote_src: yes
+        src: /etc/test/test.service
+        dest: /etc/systemd/system/test.service
+    - name: Start test service
+      become: yes
+      systemd:
+        state: restarted
+        daemon_reload: yes
+        name: test.service

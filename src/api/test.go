@@ -1,4 +1,4 @@
-package handlers
+package api
 
 import (
 	"go-template/src/common"
@@ -9,7 +9,7 @@ type TestResponse struct {
 	Hello string `json:"hello"`
 }
 
-func TestHandler(w http.ResponseWriter, r *http.Request) {
+func (a *Api) TestHandler(w http.ResponseWriter, r *http.Request) {
 	response := TestResponse{
 		Hello: "hello",
 	}
